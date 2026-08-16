@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasks - TaskZone</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f3f7f2;
+  color:#18251d;
+  padding-bottom:80px;
+}
+
+.header{
+  background:#dff8d5;
+  padding:22px 18px 28px;
+  border-radius:0 0 28px 28px;
+}
+
+.back{
+  text-decoration:none;
+  color:#18251d;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.title{
+  margin-top:25px;
+  font-size:30px;
+  font-weight:bold;
+}
+
+.subtitle{
+  margin-top:8px;
+  color:#66736a;
+}
+
+.card{
+  margin:18px;
+  padding:18px;
+  background:white;
+  border-radius:22px;
+  box-shadow:0 5px 20px #00000010;
+}
+
+.task{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 0;
+  border-bottom:1px solid #eee;
+}
+
+.task:last-child{
+  border-bottom:0;
+}
+
+.left{
+  display:flex;
+  align-items:center;
+}
+
+.icon{
+  width:48px;
+  height:48px;
+  background:#e5f8df;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+  margin-right:12px;
+}
+
+.name{
+  font-weight:bold;
+  font-size:16px;
+}
+
+.reward{
+  color:#25b52d;
+  margin-top:5px;
+  font-size:13px;
+}
+
+.start{
+  background:#32c936;
+  color:white;
+  border:0;
+  padding:11px 17px;
+  border-radius:12px;
+  font-weight:bold;
+}
+
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  box-shadow:0 -5px 20px #00000012;
+}
+
+.nav a{
+  text-decoration:none;
+  text-align:center;
+  color:#777;
+  font-size:12px;
+}
+
+.nav .active{
+  color:#20b82b;
+  font-weight:bold;
+}
+
+.nav span{
+  display:block;
+  font-size:22px;
+  margin-bottom:3px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+  <a class="back" href="index.html">← Home</a>
+
+  <div class="title">Task Center 🎯</div>
+
+  <div class="subtitle">
+    Complete available tasks and earn rewards.
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="task">
+
+    <div class="left">
+      <div class="icon">📱</div>
+
+      <div>
+        <div class="name">Daily Check-in</div>
+        <div class="reward">Reward ৳5</div>
+      </div>
+    </div>
+
+    <button class="start" onclick="completeTask(this)">
+      Start
+    </button>
+
+  </div>
+
+
+  <div class="task">
+
+    <div class="left">
+      <div class="icon">🎁</div>
+
+      <div>
+        <div class="name">Daily Bonus</div>
+        <div class="reward">Reward ৳3</div>
+      </div>
+    </div>
+
+    <button class="start" onclick="completeTask(this)">
+      Start
+    </button>
+
+  </div>
+
+
+  <div class="task">
+
+    <div class="left">
+      <div class="icon">⭐</div>
+
+      <div>
+        <div class="name">Special Task</div>
+        <div class="reward">Reward ৳10</div>
+      </div>
+    </div>
+
+    <button class="start" onclick="completeTask(this)">
+      Start
+    </button>
+
+  </div>
+
+
+  <div class="task">
+
+    <div class="left">
+      <div class="icon">👥</div>
+
+      <div>
+        <div class="name">Invite Friends</div>
+        <div class="reward">Referral reward</div>
+      </div>
+    </div>
+
+    <button class="start">
+      Invite
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="nav">
+
+  <a href="index.html">
+    <span>⌂</span>
+    Home
+  </a>
+
+  <a class="active" href="tasks.html">
+    <span>☷</span>
+    Tasks
+  </a>
+
+  <a href="#">
+    <span>☆</span>
+    Invite
+  </a>
+
+  <a href="#">
+    <span>♙</span>
+    Profile
+  </a>
+
+</div>
+
+
+<script>
+
+function completeTask(button){
+
+  button.innerText = "Completed";
+  button.style.background = "#777";
+  button.disabled = true;
+
+  alert("Task completed! Reward will be added after the account system is connected.");
+
+}
+
+</script>
+
+</body>
+  </html>

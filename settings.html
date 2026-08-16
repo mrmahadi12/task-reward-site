@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Settings - TaskZone</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f3f7f2;
+  color:#18251d;
+  padding-bottom:30px;
+}
+
+.header{
+  background:#dff8d5;
+  padding:22px 18px 28px;
+  border-radius:0 0 30px 30px;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.back{
+  color:#18251d;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.logo{
+  font-size:21px;
+  font-weight:bold;
+}
+
+.card{
+  background:white;
+  margin:18px;
+  padding:20px;
+  border-radius:22px;
+  box-shadow:0 5px 20px #00000010;
+}
+
+h2{
+  font-size:20px;
+  margin-bottom:18px;
+}
+
+.setting{
+  display:block;
+  padding:16px 0;
+  border-bottom:1px solid #eee;
+}
+
+.setting:last-child{
+  border-bottom:0;
+}
+
+.setting-title{
+  font-weight:bold;
+}
+
+.setting-text{
+  margin-top:5px;
+  color:#777;
+  font-size:13px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  font-size:15px;
+  outline:none;
+}
+
+.save{
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border:0;
+  border-radius:13px;
+  background:#32c936;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.toggle{
+  float:right;
+  width:45px;
+  height:24px;
+  cursor:pointer;
+}
+
+.danger{
+  color:#e53935;
+  text-decoration:none;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+  <div class="top">
+
+    <a class="back" href="profile.html">
+      ← Profile
+    </a>
+
+    <div class="logo">
+      🌱 TaskZone
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <h2>⚙️ Settings</h2>
+
+  <div class="setting">
+
+    <div class="setting-title">
+      👤 Profile Name
+    </div>
+
+    <input
+      type="text"
+      id="name"
+      placeholder="Enter your name"
+    >
+
+  </div>
+
+
+  <div class="setting">
+
+    <div class="setting-title">
+      📱 Payment Number
+    </div>
+
+    <div class="setting-text">
+      Your bKash/Nagad number
+    </div>
+
+    <input
+      type="tel"
+      id="payment"
+      placeholder="01XXXXXXXXX"
+      maxlength="11"
+    >
+
+  </div>
+
+
+  <div class="setting">
+
+    <div class="setting-title">
+      🔔 Notifications
+      <input
+        class="toggle"
+        type="checkbox"
+        id="notifications"
+        checked
+      >
+    </div>
+
+    <div class="setting-text">
+      Receive task and reward notifications.
+    </div>
+
+  </div>
+
+
+  <button class="save" onclick="saveSettings()">
+    Save Settings
+  </button>
+
+</div>
+
+
+<div class="card">
+
+  <div class="setting">
+    <div class="setting-title">
+      ℹ️ About TaskZone
+    </div>
+
+    <div class="setting-text">
+      TaskZone helps users manage tasks and rewards.
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+
+function saveSettings(){
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const payment =
+    document.getElementById("payment").value.trim();
+
+  if(name === ""){
+    alert("Please enter your name.");
+    return;
+  }
+
+  if(payment !== "" &&
+     (payment.length !== 11 ||
+      !payment.startsWith("01"))){
+
+    alert("Please enter a valid 11-digit number.");
+    return;
+  }
+
+  localStorage.setItem("taskzone_name",name);
+  localStorage.setItem("taskzone_payment",payment);
+
+  alert("Settings saved successfully!");
+
+}
+
+</script>
+
+</body>
+  </html>

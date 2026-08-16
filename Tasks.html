@@ -43,6 +43,26 @@ body{
   color:#66736a;
 }
 
+.balance{
+  margin:18px;
+  padding:18px;
+  background:white;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 5px 20px #00000010;
+}
+
+.balance small{
+  color:#777;
+}
+
+.money{
+  margin-top:6px;
+  font-size:28px;
+  font-weight:bold;
+  color:#20b638;
+}
+
 .card{
   margin:18px;
   padding:18px;
@@ -148,6 +168,13 @@ body{
 
 </div>
 
+
+<div class="balance">
+  <small>Available Balance</small>
+  <div class="money" id="balance">৳0.00</div>
+</div>
+
+
 <div class="card">
 
   <div class="task">
@@ -161,7 +188,7 @@ body{
       </div>
     </div>
 
-    <button class="start" onclick="completeTask(this)">
+    <button class="start" onclick="completeTask(this,5)">
       Start
     </button>
 
@@ -179,7 +206,7 @@ body{
       </div>
     </div>
 
-    <button class="start" onclick="completeTask(this)">
+    <button class="start" onclick="completeTask(this,3)">
       Start
     </button>
 
@@ -197,7 +224,7 @@ body{
       </div>
     </div>
 
-    <button class="start" onclick="completeTask(this)">
+    <button class="start" onclick="completeTask(this,10)">
       Start
     </button>
 
@@ -241,7 +268,7 @@ body{
     Invite
   </a>
 
-  <a href="https://mrmahadi12.github.io/task-reward-site/profile.html">
+  <a href="profile.html">
     <span>♙</span>
     Profile
   </a>
@@ -251,15 +278,43 @@ body{
 
 <script>
 
-function completeTask(button){
+function showBalance(){
+
+  let balance =
+    parseFloat(localStorage.getItem("taskzone_balance")) || 0;
+
+  document.getElementById("balance").innerText =
+    "৳" + balance.toFixed(2);
+}
+
+
+function completeTask(button,reward){
+
+  let balance =
+    parseFloat(localStorage.getItem("taskzone_balance")) || 0;
+
+  balance += reward;
+
+  localStorage.setItem(
+    "taskzone_balance",
+    balance.toFixed(2)
+  );
 
   button.innerText = "Completed";
   button.style.background = "#777";
   button.disabled = true;
 
-  alert("Task completed! Reward will be added after the account system is connected.");
+  showBalance();
 
+  alert(
+    "Task completed!\n৳" +
+    reward +
+    " added to your balance."
+  );
 }
+
+
+showBalance();
 
 </script>
 

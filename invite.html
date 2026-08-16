@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Invite Friends - TaskZone</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f8f5;
+    color:#17231b;
+    padding-bottom:90px;
+}
+
+.header{
+    background:#dfffd8;
+    padding:20px;
+    border-radius:0 0 30px 30px;
+}
+
+.top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.home{
+    text-decoration:none;
+    color:#17231b;
+    font-size:17px;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.header h1{
+    margin-top:30px;
+    font-size:28px;
+}
+
+.header p{
+    margin-top:8px;
+    color:#666;
+}
+
+.card{
+    background:white;
+    margin:20px;
+    padding:22px;
+    border-radius:22px;
+    box-shadow:0 5px 18px #00000012;
+}
+
+.card h2{
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.description{
+    color:#777;
+    line-height:1.5;
+}
+
+.reward{
+    margin-top:20px;
+    background:#e8fbe5;
+    padding:20px;
+    border-radius:16px;
+    text-align:center;
+}
+
+.reward-title{
+    color:#666;
+}
+
+.reward-money{
+    margin-top:6px;
+    color:#20b638;
+    font-size:30px;
+    font-weight:bold;
+}
+
+.link-title{
+    margin-top:22px;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.link-box{
+    display:flex;
+    gap:8px;
+}
+
+.link-box input{
+    width:100%;
+    min-width:0;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:13px;
+}
+
+button{
+    border:0;
+    background:#2ac83b;
+    color:white;
+    padding:13px 18px;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+.share{
+    width:100%;
+    margin-top:14px;
+    font-size:16px;
+}
+
+.step{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.step:last-child{
+    border-bottom:0;
+}
+
+.circle{
+    width:40px;
+    height:40px;
+    background:#e5f9e1;
+    color:#20b638;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.step p{
+    color:#777;
+    margin-top:4px;
+    font-size:14px;
+}
+
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:75px;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    box-shadow:0 -3px 15px #00000012;
+}
+
+.bottom a{
+    text-decoration:none;
+    color:#777;
+    text-align:center;
+    font-size:13px;
+}
+
+.bottom .active{
+    color:#20b638;
+    font-weight:bold;
+}
+
+.icon{
+    display:block;
+    font-size:23px;
+    margin-bottom:4px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <div class="top">
+        <a class="home" href="index.html">← Home</a>
+        <div class="logo">🌱 TaskZone</div>
+    </div>
+
+    <h1>Invite Friends 👥</h1>
+    <p>Invite your friends and earn rewards.</p>
+
+</div>
+
+
+<div class="card">
+
+    <h2>🎁 Referral Rewards</h2>
+
+    <p class="description">
+        Share your invite link with friends and earn rewards
+        when eligible referrals complete the required tasks.
+    </p>
+
+    <div class="reward">
+        <div class="reward-title">
+            Reward per eligible friend
+        </div>
+
+        <div class="reward-money">
+            ৳5
+        </div>
+    </div>
+
+    <div class="link-title">
+        Your Invite Link
+    </div>
+
+    <div class="link-box">
+        <input
+            id="inviteLink"
+            value="https://mrmahadi12.github.io/task-reward-site/?ref=USER123"
+            readonly
+        >
+
+        <button onclick="copyLink()">
+            Copy
+        </button>
+    </div>
+
+    <button class="share" onclick="shareLink()">
+        📤 Share Invite Link
+    </button>
+
+</div>
+
+
+<div class="card">
+
+    <h2>How It Works</h2>
+
+    <div class="step">
+
+        <div class="circle">1</div>
+
+        <div>
+            <b>Copy your link</b>
+            <p>Copy your personal invite link.</p>
+        </div>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="circle">2</div>
+
+        <div>
+            <b>Invite friends</b>
+            <p>Send your link to your friends.</p>
+        </div>
+
+    </div>
+
+
+    <div class="step">
+
+        <div class="circle">3</div>
+
+        <div>
+            <b>Earn rewards</b>
+            <p>Complete eligible referrals to earn.</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h2>👥 Your Invites</h2>
+
+    <div class="reward">
+
+        <div class="reward-title">
+            Total Invited
+        </div>
+
+        <div class="reward-money">
+            0
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="bottom">
+
+    <a href="index.html">
+        <span class="icon">⌂</span>
+        Home
+    </a>
+
+    <a href="Tasks.html">
+        <span class="icon">☷</span>
+        Tasks
+    </a>
+
+    <a class="active" href="invite.html">
+        <span class="icon">☆</span>
+        Invite
+    </a>
+
+    <a href="#">
+        <span class="icon">♙</span>
+        Profile
+    </a>
+
+</div>
+
+
+<script>
+
+function copyLink(){
+
+    let link = document.getElementById("inviteLink");
+
+    navigator.clipboard.writeText(link.value);
+
+    alert("Invite link copied!");
+
+}
+
+
+function shareLink(){
+
+    let link = document.getElementById("inviteLink").value;
+
+    if(navigator.share){
+
+        navigator.share({
+            title:"TaskZone",
+            text:"Join TaskZone using my invite link!",
+            url:link
+        });
+
+    }else{
+
+        navigator.clipboard.writeText(link);
+
+        alert("Invite link copied!");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

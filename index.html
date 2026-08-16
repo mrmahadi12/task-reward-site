@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>TaskZone</title>
 
 <style>
@@ -16,7 +17,7 @@
 body{
   background:#f3f7f2;
   color:#18251d;
-  padding-bottom:80px;
+  padding-bottom:90px;
 }
 
 .header{
@@ -43,6 +44,7 @@ body{
   padding:12px 17px;
   border-radius:14px;
   font-weight:bold;
+  text-decoration:none;
 }
 
 .welcome{
@@ -67,6 +69,7 @@ body{
   font-size:32px;
   font-weight:bold;
   margin-top:7px;
+  color:#20b638;
 }
 
 .card{
@@ -93,6 +96,11 @@ body{
   padding:11px 20px;
   border-radius:12px;
   font-weight:bold;
+  cursor:pointer;
+}
+
+.start.completed{
+  background:#777;
 }
 
 .task{
@@ -152,6 +160,7 @@ body{
   text-align:center;
   color:#777;
   font-size:12px;
+  text-decoration:none;
 }
 
 .nav .active{
@@ -172,8 +181,15 @@ body{
 <div class="header">
 
   <div class="top">
-    <div class="logo">🌱 TaskZone</div>
-    <button class="withdraw">Withdraw</button>
+
+    <div class="logo">
+      🌱 TaskZone
+    </div>
+
+    <a class="withdraw" href="withdraw.html">
+      Withdraw
+    </a>
+
   </div>
 
   <div class="welcome">
@@ -181,65 +197,163 @@ body{
   </div>
 
   <div class="balance">
-    <small>Your Available Balance</small>
-    <div class="money">৳ 0.00</div>
+
+    <small>
+      Your Available Balance
+    </small>
+
+    <div class="money" id="homeBalance">
+      ৳0.00
+    </div>
+
   </div>
 
 </div>
 
 
 <div class="card">
-  <h2>🎯 Earn Rewards</h2>
-  <p>Complete simple tasks and collect rewards.</p>
 
-  <a class="start" href="Tasks.html" style="text-decoration:none;display:inline-block;">
+  <h2>
+    🎯 Earn Rewards
+  </h2>
+
+  <p>
+    Complete simple tasks and collect rewards.
+  </p>
+
+  <a
+    class="start"
+    href="Tasks.html"
+    style="text-decoration:none;display:inline-block;"
+  >
     View Tasks
   </a>
-</div>
-
-
-<div class="card">
-  <h2>Today's Tasks</h2>
-
-  <div class="task">
-    <div class="task-left">
-      <div class="icon">📱</div>
-      <div>
-        <div class="task-title">Daily Check-in</div>
-        <div class="reward">Reward ৳5</div>
-      </div>
-    </div>
-    <button class="start">Start</button>
-  </div>
-
-  <div class="task">
-    <div class="task-left">
-      <div class="icon">🎁</div>
-      <div>
-        <div class="task-title">Daily Bonus</div>
-        <div class="reward">Reward ৳3</div>
-      </div>
-    </div>
-    <button class="start">Start</button>
-  </div>
-
-  <div class="task">
-    <div class="task-left">
-      <div class="icon">👥</div>
-      <div>
-        <div class="task-title">Invite Friends</div>
-        <div class="reward">Referral Reward</div>
-      </div>
-    </div>
-    <button class="start">Invite</button>
-  </div>
 
 </div>
 
 
 <div class="card">
-  <h2>🏆 Weekly Ranking</h2>
-  <p>Top users will receive bonus rewards.</p>
+
+  <h2>
+    Today's Tasks
+  </h2>
+
+
+  <!-- Daily Check-in -->
+
+  <div class="task">
+
+    <div class="task-left">
+
+      <div class="icon">
+        📱
+      </div>
+
+      <div>
+
+        <div class="task-title">
+          Daily Check-in
+        </div>
+
+        <div class="reward">
+          Reward ৳5
+        </div>
+
+      </div>
+
+    </div>
+
+    <button
+      class="start"
+      id="homeCheckin"
+      onclick="claimHomeTask('homeCheckin',5)"
+    >
+      Claim
+    </button>
+
+  </div>
+
+
+  <!-- Daily Bonus -->
+
+  <div class="task">
+
+    <div class="task-left">
+
+      <div class="icon">
+        🎁
+      </div>
+
+      <div>
+
+        <div class="task-title">
+          Daily Bonus
+        </div>
+
+        <div class="reward">
+          Reward ৳3
+        </div>
+
+      </div>
+
+    </div>
+
+    <button
+      class="start"
+      id="homeBonus"
+      onclick="claimHomeTask('homeBonus',3)"
+    >
+      Claim
+    </button>
+
+  </div>
+
+
+  <!-- Invite -->
+
+  <div class="task">
+
+    <div class="task-left">
+
+      <div class="icon">
+        👥
+      </div>
+
+      <div>
+
+        <div class="task-title">
+          Invite Friends
+        </div>
+
+        <div class="reward">
+          Referral Reward
+        </div>
+
+      </div>
+
+    </div>
+
+    <a
+      class="start"
+      href="invite.html"
+    >
+      Invite
+    </a>
+
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <h2>
+    🏆 Weekly Ranking
+  </h2>
+
+  <p>
+    Top users will receive bonus rewards.
+  </p>
 
   <div class="task">
     <div>🥇 User One</div>
@@ -255,6 +369,7 @@ body{
     <div>🥉 User Three</div>
     <strong>৳150</strong>
   </div>
+
 </div>
 
 
@@ -265,19 +380,162 @@ body{
     Home
   </div>
 
-  <a href="Tasks.html" style="text-decoration:none;">
+  <a href="Tasks.html">
     <span>☷</span>
     Tasks
   </a>
 
-  <a href="invite.html" style="text-decoration:none;text-align:center;color:#777;font-size:12px;">
-  <span>☆</span>
-  Invite
-</a>
+  <a href="invite.html">
+    <span>☆</span>
+    Invite
+  </a>
 
-  <a href="profile.html" style="text-decoration:none;">
+  <a href="profile.html">
     <span>♙</span>
     Profile
   </a>
 
 </div>
+
+
+<script>
+
+function getBalance(){
+
+  return Number(
+    localStorage.getItem("taskzone_balance") || "0"
+  );
+
+}
+
+
+function saveBalance(balance){
+
+  localStorage.setItem(
+    "taskzone_balance",
+    balance.toFixed(2)
+  );
+
+}
+
+
+function showHomeBalance(){
+
+  const balance =
+    getBalance();
+
+  document.getElementById(
+    "homeBalance"
+  ).textContent =
+    "৳" + balance.toFixed(2);
+
+}
+
+
+function claimHomeTask(taskId,reward){
+
+  const button =
+    document.getElementById(taskId);
+
+
+  if(
+    localStorage.getItem(
+      "home_task_" + taskId
+    ) === "claimed"
+  ){
+
+    alert(
+      "You have already claimed this reward."
+    );
+
+    return;
+
+  }
+
+
+  let balance =
+    getBalance();
+
+
+  balance += Number(reward);
+
+
+  saveBalance(balance);
+
+
+  localStorage.setItem(
+    "home_task_" + taskId,
+    "claimed"
+  );
+
+
+  button.textContent =
+    "Claimed";
+
+  button.classList.add(
+    "completed"
+  );
+
+  button.disabled =
+    true;
+
+
+  showHomeBalance();
+
+
+  alert(
+    "Reward claimed!\n\n" +
+    "Added: ৳" + reward +
+    "\n" +
+    "Balance: ৳" +
+    balance.toFixed(2)
+  );
+
+}
+
+
+function restoreHomeTasks(){
+
+  const tasks = [
+    "homeCheckin",
+    "homeBonus"
+  ];
+
+
+  tasks.forEach(function(taskId){
+
+    if(
+      localStorage.getItem(
+        "home_task_" + taskId
+      ) === "claimed"
+    ){
+
+      const button =
+        document.getElementById(taskId);
+
+
+      button.textContent =
+        "Claimed";
+
+      button.classList.add(
+        "completed"
+      );
+
+      button.disabled =
+        true;
+
+    }
+
+  });
+
+}
+
+
+showHomeBalance();
+
+restoreHomeTasks();
+
+</script>
+
+</body>
+</html>

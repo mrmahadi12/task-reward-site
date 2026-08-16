@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskZone</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
+
+body{
+  background:#f3f7f2;
+  color:#18251d;
+  padding-bottom:80px;
+}
+
+.header{
+  background:#dff8d5;
+  padding:22px 18px 28px;
+  border-radius:0 0 28px 28px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:23px;
+  font-weight:bold;
+}
+
+.withdraw{
+  background:#32c936;
+  color:white;
+  border:0;
+  padding:12px 17px;
+  border-radius:14px;
+  font-weight:bold;
+}
+
+.welcome{
+  margin-top:25px;
+  font-size:27px;
+  font-weight:bold;
+}
+
+.balance{
+  margin-top:15px;
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 5px 20px #00000010;
+}
+
+.balance small{
+  color:#777;
+}
+
+.money{
+  font-size:32px;
+  font-weight:bold;
+  margin-top:7px;
+}
+
+.card{
+  margin:18px;
+  padding:20px;
+  background:white;
+  border-radius:22px;
+  box-shadow:0 5px 20px #00000010;
+}
+
+.card h2{
+  margin-bottom:8px;
+}
+
+.card p{
+  color:#777;
+  margin-bottom:15px;
+}
+
+.start{
+  background:#32c936;
+  color:white;
+  border:0;
+  padding:11px 20px;
+  border-radius:12px;
+  font-weight:bold;
+}
+
+.task{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 0;
+  border-bottom:1px solid #eee;
+}
+
+.task:last-child{
+  border-bottom:0;
+}
+
+.icon{
+  width:45px;
+  height:45px;
+  background:#e5f8df;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  margin-right:12px;
+}
+
+.task-left{
+  display:flex;
+  align-items:center;
+}
+
+.task-title{
+  font-weight:bold;
+}
+
+.reward{
+  color:#24b52b;
+  font-size:13px;
+  margin-top:4px;
+}
+
+.nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  box-shadow:0 -5px 20px #00000012;
+}
+
+.nav div{
+  text-align:center;
+  color:#777;
+  font-size:12px;
+}
+
+.nav .active{
+  color:#20b82b;
+  font-weight:bold;
+}
+
+.nav span{
+  display:block;
+  font-size:22px;
+  margin-bottom:3px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+  <div class="top">
+    <div class="logo">🌱 TaskZone</div>
+    <button class="withdraw">Withdraw</button>
+  </div>
+
+  <div class="welcome">
+    Welcome back 👋
+  </div>
+
+  <div class="balance">
+    <small>Your Available Balance</small>
+    <div class="money">৳ 0.00</div>
+  </div>
+
+</div>
+
+
+<div class="card">
+  <h2>🎯 Earn Rewards</h2>
+  <p>Complete simple tasks and collect rewards.</p>
+  <button class="start">View Tasks</button>
+</div>
+
+
+<div class="card">
+  <h2>Today's Tasks</h2>
+
+  <div class="task">
+    <div class="task-left">
+      <div class="icon">📱</div>
+      <div>
+        <div class="task-title">Daily Check-in</div>
+        <div class="reward">Reward ৳5</div>
+      </div>
+    </div>
+    <button class="start">Start</button>
+  </div>
+
+  <div class="task">
+    <div class="task-left">
+      <div class="icon">🎁</div>
+      <div>
+        <div class="task-title">Daily Bonus</div>
+        <div class="reward">Reward ৳3</div>
+      </div>
+    </div>
+    <button class="start">Start</button>
+  </div>
+
+  <div class="task">
+    <div class="task-left">
+      <div class="icon">👥</div>
+      <div>
+        <div class="task-title">Invite Friends</div>
+        <div class="reward">Referral Reward</div>
+      </div>
+    </div>
+    <button class="start">Invite</button>
+  </div>
+
+</div>
+
+
+<div class="card">
+  <h2>🏆 Weekly Ranking</h2>
+  <p>Top users will receive bonus rewards.</p>
+
+  <div class="task">
+    <div>🥇 User One</div>
+    <strong>৳500</strong>
+  </div>
+
+  <div class="task">
+    <div>🥈 User Two</div>
+    <strong>৳300</strong>
+  </div>
+
+  <div class="task">
+    <div>🥉 User Three</div>
+    <strong>৳150</strong>
+  </div>
+</div>
+
+
+<div class="nav">
+  <div class="active">
+    <span>⌂</span>
+    Home
+  </div>
+
+  <div>
+    <span>☷</span>
+    Tasks
+  </div>
+
+  <div>
+    <span>☆</span>
+    Invite
+  </div>
+
+  <div>
+    <span>♙</span>
+    Profile
+  </div>
+</div>
+
+</body>
+  </html>

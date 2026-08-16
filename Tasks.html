@@ -16,7 +16,7 @@
 body{
   background:#f3f7f2;
   color:#18251d;
-  padding-bottom:80px;
+  padding-bottom:90px;
 }
 
 .header{
@@ -45,20 +45,21 @@ body{
 
 .balance{
   margin:18px;
-  padding:18px;
+  padding:20px;
   background:white;
-  border-radius:20px;
+  border-radius:22px;
   text-align:center;
   box-shadow:0 5px 20px #00000010;
 }
 
-.balance small{
+.balance-title{
   color:#777;
+  font-size:14px;
 }
 
-.money{
-  margin-top:6px;
-  font-size:28px;
+.balance-money{
+  margin-top:7px;
+  font-size:32px;
   font-weight:bold;
   color:#20b638;
 }
@@ -121,6 +122,10 @@ body{
   text-decoration:none;
 }
 
+.start.completed{
+  background:#777;
+}
+
 .nav{
   position:fixed;
   bottom:0;
@@ -158,9 +163,13 @@ body{
 
 <div class="header">
 
-  <a class="back" href="index.html">← Home</a>
+  <a class="back" href="index.html">
+    ← Home
+  </a>
 
-  <div class="title">Task Center 🎯</div>
+  <div class="title">
+    Task Center 🎯
+  </div>
 
   <div class="subtitle">
     Complete available tasks and earn rewards.
@@ -170,79 +179,141 @@ body{
 
 
 <div class="balance">
-  <small>Available Balance</small>
-  <div class="money" id="balance">৳0.00</div>
+
+  <div class="balance-title">
+    Available Balance
+  </div>
+
+  <div class="balance-money" id="balance">
+    ৳0.00
+  </div>
+
 </div>
 
 
 <div class="card">
 
+  <!-- Daily Check-in -->
   <div class="task">
 
     <div class="left">
-      <div class="icon">📱</div>
+
+      <div class="icon">
+        📱
+      </div>
 
       <div>
-        <div class="name">Daily Check-in</div>
-        <div class="reward">Reward ৳5</div>
+        <div class="name">
+          Daily Check-in
+        </div>
+
+        <div class="reward">
+          Reward ৳5
+        </div>
       </div>
+
     </div>
 
-    <button class="start" onclick="completeTask(this,5)">
+    <button
+      class="start"
+      id="dailyCheckin"
+      onclick="completeTask('dailyCheckin',5)"
+    >
       Start
     </button>
 
   </div>
 
 
+  <!-- Daily Bonus -->
   <div class="task">
 
     <div class="left">
-      <div class="icon">🎁</div>
+
+      <div class="icon">
+        🎁
+      </div>
 
       <div>
-        <div class="name">Daily Bonus</div>
-        <div class="reward">Reward ৳3</div>
+        <div class="name">
+          Daily Bonus
+        </div>
+
+        <div class="reward">
+          Reward ৳3
+        </div>
       </div>
+
     </div>
 
-    <button class="start" onclick="completeTask(this,3)">
+    <button
+      class="start"
+      id="dailyBonus"
+      onclick="completeTask('dailyBonus',3)"
+    >
       Start
     </button>
 
   </div>
 
 
+  <!-- Special Task -->
   <div class="task">
 
     <div class="left">
-      <div class="icon">⭐</div>
+
+      <div class="icon">
+        ⭐
+      </div>
 
       <div>
-        <div class="name">Special Task</div>
-        <div class="reward">Reward ৳10</div>
+        <div class="name">
+          Special Task
+        </div>
+
+        <div class="reward">
+          Reward ৳10
+        </div>
       </div>
+
     </div>
 
-    <button class="start" onclick="completeTask(this,10)">
+    <button
+      class="start"
+      id="specialTask"
+      onclick="completeTask('specialTask',10)"
+    >
       Start
     </button>
 
   </div>
 
 
+  <!-- Invite -->
   <div class="task">
 
     <div class="left">
-      <div class="icon">👥</div>
+
+      <div class="icon">
+        👥
+      </div>
 
       <div>
-        <div class="name">Invite Friends</div>
-        <div class="reward">Referral reward</div>
+        <div class="name">
+          Invite Friends
+        </div>
+
+        <div class="reward">
+          Referral reward
+        </div>
       </div>
+
     </div>
 
-    <a class="start" href="invite.html">
+    <a
+      class="start"
+      href="invite.html"
+    >
       Invite
     </a>
 
@@ -278,43 +349,166 @@ body{
 
 <script>
 
-function showBalance(){
+/* =========================
+   BALANCE
+========================= */
 
-  let balance =
-    parseFloat(localStorage.getItem("taskzone_balance")) || 0;
+function getBalance(){
 
-  document.getElementById("balance").innerText =
-    "৳" + balance.toFixed(2);
+  return Number(
+    localStorage.getItem("taskzone_balance") || "0"
+  );
+
 }
 
 
-function completeTask(button,reward){
-
-  let balance =
-    parseFloat(localStorage.getItem("taskzone_balance")) || 0;
-
-  balance += reward;
+function saveBalance(balance){
 
   localStorage.setItem(
     "taskzone_balance",
     balance.toFixed(2)
   );
 
-  button.innerText = "Completed";
-  button.style.background = "#777";
-  button.disabled = true;
-
-  showBalance();
-
-  alert(
-    "Task completed!\n৳" +
-    reward +
-    " added to your balance."
-  );
 }
 
 
+function showBalance(){
+
+  const balance = getBalance();
+
+  document.getElementById("balance").textContent =
+    "৳" + balance.toFixed(2);
+
+}
+
+
+/* =========================
+   TASK STATUS
+========================= */
+
+function taskCompleted(taskId){
+
+  return localStorage.getItem(
+    "task_" + taskId
+  ) === "completed";
+
+}
+
+
+function setTaskCompleted(taskId){
+
+  localStorage.setItem(
+    "task_" + taskId,
+    "completed"
+  );
+
+}
+
+
+/* =========================
+   COMPLETE TASK
+========================= */
+
+function completeTask(taskId,reward){
+
+  const button =
+    document.getElementById(taskId);
+
+
+  if(taskCompleted(taskId)){
+
+    alert("You have already completed this task.");
+
+    return;
+
+  }
+
+
+  let balance =
+    getBalance();
+
+
+  balance =
+    balance + Number(reward);
+
+
+  saveBalance(balance);
+
+
+  setTaskCompleted(taskId);
+
+
+  button.textContent =
+    "Completed";
+
+  button.classList.add(
+    "completed"
+  );
+
+  button.disabled =
+    true;
+
+
+  showBalance();
+
+
+  alert(
+    "Task completed!\n\n" +
+    "Reward added: ৳" +
+    reward +
+    "\n\n" +
+    "New balance: ৳" +
+    balance.toFixed(2)
+  );
+
+}
+
+
+/* =========================
+   RESTORE TASKS
+========================= */
+
+function restoreTasks(){
+
+  const tasks = [
+    "dailyCheckin",
+    "dailyBonus",
+    "specialTask"
+  ];
+
+
+  tasks.forEach(function(taskId){
+
+    if(taskCompleted(taskId)){
+
+      const button =
+        document.getElementById(taskId);
+
+
+      button.textContent =
+        "Completed";
+
+      button.classList.add(
+        "completed"
+      );
+
+      button.disabled =
+        true;
+
+    }
+
+  });
+
+}
+
+
+/* =========================
+   START
+========================= */
+
 showBalance();
+
+restoreTasks();
 
 </script>
 

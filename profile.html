@@ -167,17 +167,30 @@ body{
 <div class="header">
 
   <div class="top">
-    <a class="back" href="index.html">← Home</a>
-    <div class="logo">🌱 TaskZone</div>
+
+    <a class="back" href="index.html">
+      ← Home
+    </a>
+
+    <div class="logo">
+      🌱 TaskZone
+    </div>
+
   </div>
 
   <div class="profile">
 
-    <div class="avatar">👤</div>
+    <div class="avatar">
+      👤
+    </div>
 
-    <h1>My Profile</h1>
+    <h1>
+      My Profile
+    </h1>
 
-    <p>Welcome to TaskZone</p>
+    <p>
+      Welcome to TaskZone
+    </p>
 
   </div>
 
@@ -190,7 +203,7 @@ body{
     Current Balance
   </div>
 
-  <div class="balance-money">
+  <div class="balance-money" id="profileBalance">
     ৳0.00
   </div>
 
@@ -202,18 +215,33 @@ body{
   <div class="stats">
 
     <div>
-      <div class="stat-number">0</div>
-      <div class="stat-name">Tasks</div>
+      <div class="stat-number">
+        0
+      </div>
+
+      <div class="stat-name">
+        Tasks
+      </div>
     </div>
 
     <div>
-      <div class="stat-number">0</div>
-      <div class="stat-name">Invites</div>
+      <div class="stat-number">
+        0
+      </div>
+
+      <div class="stat-name">
+        Invites
+      </div>
     </div>
 
     <div>
-      <div class="stat-number">৳0</div>
-      <div class="stat-name">Earned</div>
+      <div class="stat-number" id="earned">
+        ৳0
+      </div>
+
+      <div class="stat-name">
+        Earned
+      </div>
     </div>
 
   </div>
@@ -224,18 +252,23 @@ body{
 <div class="card">
 
   <a class="menu" href="Tasks.html">
-    <span>🎯</span> My Tasks
+    <span>🎯</span>
+    My Tasks
   </a>
 
   <a class="menu" href="invite.html">
-    <span>👥</span> Invite Friends
+    <span>👥</span>
+    Invite Friends
   </a>
 
   <a class="menu" href="withdraw.html">
-    <span>💰</span> Withdraw
-</a>
+    <span>💰</span>
+    Withdraw
+  </a>
+
   <a class="menu" href="settings.html">
-  <span>⚙️</span> Settings
+    <span>⚙️</span>
+    Settings
   </a>
 
 </div>
@@ -264,6 +297,34 @@ body{
   </a>
 
 </div>
+
+
+<script>
+
+function loadProfileBalance(){
+
+  const balance =
+    Number(
+      localStorage.getItem("taskzone_balance") || "0"
+    );
+
+  document.getElementById(
+    "profileBalance"
+  ).textContent =
+    "৳" + balance.toFixed(2);
+
+
+  document.getElementById(
+    "earned"
+  ).textContent =
+    "৳" + balance.toFixed(2);
+
+}
+
+
+loadProfileBalance();
+
+</script>
 
 </body>
 </html>

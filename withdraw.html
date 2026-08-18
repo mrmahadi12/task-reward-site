@@ -254,6 +254,10 @@ const WITHDRAW_FEE = 5;
 const MIN_BALANCE_REQUIRED = MIN_WITHDRAW + WITHDRAW_FEE;
 
 
+/* TEST ONLY: Set balance to ৳55 */
+localStorage.setItem("taskzone_balance", "55.00");
+
+
 function getBalance(){
 
   return Number(
@@ -501,7 +505,6 @@ function requestWithdraw(){
   saveHistory(history);
 
 
-  // Withdrawal amount + fee are deducted together
   saveBalance(
     balance - totalDeduction
   );
@@ -529,7 +532,7 @@ function requestWithdraw(){
   );
 
 }
-localStorage.setItem("taskzone_balance", "55.00");
+
 
 showBalance();
 

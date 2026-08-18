@@ -101,13 +101,17 @@ input{
   font-weight:bold;
 }
 
+.withdraw-btn:disabled{
+  background:#aaa;
+}
+
 .info{
   background:#f1faee;
   padding:14px;
   border-radius:14px;
   color:#66736a;
   font-size:13px;
-  line-height:1.6;
+  line-height:1.7;
 }
 
 .history-item{
@@ -202,11 +206,13 @@ input{
     id="amount"
     placeholder="Minimum ৳50"
     min="50"
+    step="1"
   >
 
 
   <button
     class="withdraw-btn"
+    id="withdrawBtn"
     onclick="requestWithdraw()"
   >
     Request Withdraw
@@ -219,6 +225,8 @@ input{
 
   <div class="info">
     Minimum withdrawal: ৳50<br>
+    Withdrawal fee: ৳5<br>
+    Minimum balance required: ৳55<br>
     Supported methods: bKash and Nagad<br>
     Withdrawal requests are reviewed before payment.
   </div>
@@ -241,6 +249,11 @@ input{
 
 <script>
 
+const MIN_WITHDRAW = 50;
+const WITHDRAW_FEE = 5;
+const MIN_BALANCE_REQUIRED = MIN_WITHDRAW + WITHDRAW_FEE;
+
+
 function getBalance(){
 
   return Number(
@@ -262,13 +275,29 @@ function saveBalance(balance){
 
 function showBalance(){
 
-  const balance =
-    getBalance();
+  const balance = getBalance();
 
   document.getElementById(
     "withdrawBalance"
   ).textContent =
     "৳" + balance.toFixed(2);
+
+
+  const button =
+    document.getElementById("withdrawBtn");
+
+
+  if(balance < MIN_BALANCE_REQUIRED){
+
+    button.disabled = true;
+    button.textContent = "Need ৳55 Balance";
+
+  }else{
+
+    button.disabled = false;
+    button.textContent = "Request Withdraw";
+
+  }
 
 }
 
@@ -296,8 +325,7 @@ function saveHistory(history){
 
 function showHistory(){
 
-  const history =
-    getHistory();
+  const history = getHistory();
 
   const box =
     document.getElementById("history");
@@ -324,17 +352,31 @@ function showHistory(){
     div.className =
       "history-item";
 
+
     div.innerHTML =
       "<strong>" +
       item.method +
       "</strong><br>" +
 
-      "Amount: ৳" +
-      item.amount +
+      "Account: " +
+      item.number +
+      "<br>" +
+
+      "Withdrawal: ৳" +
+      Number(item.amount).toFixed(2) +
+      "<br>" +
+
+      "Fee: ৳" +
+      Number(item.fee).toFixed(2) +
+      "<br>" +
+
+      "Total deducted: ৳" +
+      Number(item.total).toFixed(2) +
 
       "<div class='status'>" +
       "Pending review" +
       "</div>";
+
 
     box.appendChild(div);
 
@@ -382,7 +424,18 @@ function requestWithdraw(){
   }
 
 
-  if(amount < 50){
+  if(!Number.isFinite(amount)){
+
+    alert(
+      "Please enter a withdrawal amount."
+    );
+
+    return;
+
+  }
+
+
+  if(amount < MIN_WITHDRAW){
 
     alert(
       "Minimum withdrawal is ৳50."
@@ -393,10 +446,28 @@ function requestWithdraw(){
   }
 
 
-  if(amount > balance){
+  const totalDeduction =
+    amount + WITHDRAW_FEE;
+
+
+  if(balance < MIN_BALANCE_REQUIRED){
 
     alert(
-      "Insufficient balance."
+      "You need at least ৳55 balance to withdraw."
+    );
+
+    return;
+
+  }
+
+
+  if(totalDeduction > balance){
+
+    alert(
+      "Insufficient balance.\n\n" +
+      "Withdrawal: ৳" + amount.toFixed(2) +
+      "\nFee: ৳" + WITHDRAW_FEE.toFixed(2) +
+      "\nTotal required: ৳" + totalDeduction.toFixed(2)
     );
 
     return;
@@ -410,13 +481,19 @@ function requestWithdraw(){
 
   history.unshift({
 
-    method:method,
+    method: method,
 
-    number:number,
+    number: number,
 
-    amount:amount,
+    amount: amount,
 
-    date:new Date().toLocaleString()
+    fee: WITHDRAW_FEE,
+
+    total: totalDeduction,
+
+    date: new Date().toLocaleString(),
+
+    status: "Pending"
 
   });
 
@@ -424,13 +501,9 @@ function requestWithdraw(){
   saveHistory(history);
 
 
-  /*
-    Deduct requested amount
-    from the local demo balance.
-  */
-
+  // Withdrawal amount + fee are deducted together
   saveBalance(
-    balance - amount
+    balance - totalDeduction
   );
 
 
@@ -449,7 +522,9 @@ function requestWithdraw(){
   alert(
     "Withdrawal request submitted!\n\n" +
     "Method: " + method +
-    "\nAmount: ৳" + amount +
+    "\nWithdrawal: ৳" + amount.toFixed(2) +
+    "\nFee: ৳" + WITHDRAW_FEE.toFixed(2) +
+    "\nTotal deducted: ৳" + totalDeduction.toFixed(2) +
     "\n\nStatus: Pending review"
   );
 
